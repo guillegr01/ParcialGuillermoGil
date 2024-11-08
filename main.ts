@@ -59,7 +59,6 @@ const handler = async (req:Request) : Promise<Response> => {
       return new Response(JSON.stringify(personByEmail));
 
     }
-
   }else if (method==="POST") {
     if (path==="/personas") {
       
@@ -89,7 +88,11 @@ const handler = async (req:Request) : Promise<Response> => {
     }
   }else if (method==="PUT") {
     
-    
+    if (path==="/persona") {
+      
+      const person = await req.json();
+      if (!person.name||!person.email||!person.telefono)return new Response("Bad request", {status:404});
+    }
 
   }else if (method==="DELETE") {
     if (path==="/persona") {
